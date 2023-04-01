@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:store_app/common/widgets/main_wrapper.dart';
 import 'package:store_app/config/my_theme.dart';
+import 'package:store_app/features/feature_home/presentation/screens/home_screen.dart';
 import 'package:store_app/features/feature_intro/presentation/bloc/splash_cubit/splash_cubit.dart';
 import 'package:store_app/features/feature_intro/presentation/screens/intro_main_wrapper.dart';
 import 'features/feature_intro/presentation/screens/splash_screen.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         IntroMainWrapper.routeName: (context) => IntroMainWrapper(),
         MainWrapper.routeName: (context)=> MainWrapper(),
+        HomeScreen.routeName:(context)=> HomeScreen(),
       },
       supportedLocales: [
         Locale('en', ''),
