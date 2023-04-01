@@ -6,7 +6,6 @@ import 'package:store_app/common/utils/custom_snackbar.dart';
 import 'package:store_app/common/utils/prefs_operator.dart';
 import 'package:store_app/common/widgets/main_wrapper.dart';
 import 'package:store_app/features/feature_intro/presentation/bloc/splash_cubit/splash_cubit.dart';
-import 'package:store_app/features/feature_intro/presentation/screens/home_screen.dart';
 import 'package:store_app/features/feature_intro/presentation/screens/intro_main_wrapper.dart';
 import 'package:store_app/locator.dart';
 

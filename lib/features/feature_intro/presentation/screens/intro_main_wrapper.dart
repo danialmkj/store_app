@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:store_app/common/utils/prefs_operator.dart';
-import 'package:store_app/features/feature_intro/presentation/screens/home_screen.dart';
+import 'package:store_app/common/widgets/main_wrapper.dart';
 import 'package:store_app/features/feature_intro/presentation/widgets/get_start_btn.dart';
 import 'package:store_app/features/feature_intro/presentation/widgets/intro_page.dart';
 import 'package:store_app/locator.dart';
@@ -104,8 +104,8 @@ class IntroMainWrapper extends StatelessWidget {
 
                                   Navigator.pushNamedAndRemoveUntil(
                                       context,
-                                      HomeScreen.routeName,
-                                      ModalRoute.withName('/home_screen'));
+                                      MainWrapper.routeName,
+                                      ModalRoute.withName('main_wrapper'));
                                 }));
                       } else {
                         return DelayedWidget(
