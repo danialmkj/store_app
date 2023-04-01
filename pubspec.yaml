@@ -28,12 +28,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  badges: ^3.0.3
   bloc: ^8.1.1
   connectivity_plus: ^3.0.3
   cupertino_icons: ^1.0.2
   delayed_widget: ^1.1.2
   dio: ^5.1.1
   flutter_bloc: ^8.1.2
+  flutter_svg: ^2.0.4
+  font_awesome_flutter: ^10.4.0
   get_it: ^7.2.0
   loading_animation_widget: ^1.2.0+4
   shared_preferences: ^2.1.0

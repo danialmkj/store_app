@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
+import 'package:store_app/common/widgets/main_wrapper.dart';
 import 'package:store_app/config/my_theme.dart';
 import 'package:store_app/features/feature_intro/presentation/bloc/splash_cubit/splash_cubit.dart';
 import 'package:store_app/features/feature_intro/presentation/screens/home_screen.dart';
@@ -17,6 +19,9 @@ Future<void> main() async {
       BlocProvider(
         create: (context) => SplashCubit(),
       ),
+      BlocProvider(
+        create: (context) => BottomNavCubit(),
+      )
     ],
     child: MyApp(),
   ));
@@ -34,6 +39,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         IntroMainWrapper.routeName: (context) => IntroMainWrapper(),
         HomeScreen.routeName: (context)=> HomeScreen(),
+        MainWrapper.routeName: (context)=> MainWrapper(),
       },
       supportedLocales: [
         Locale('en', ''),

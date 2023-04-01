@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:store_app/common/utils/custom_snackbar.dart';
 import 'package:store_app/common/utils/prefs_operator.dart';
+import 'package:store_app/common/widgets/main_wrapper.dart';
 import 'package:store_app/features/feature_intro/presentation/bloc/splash_cubit/splash_cubit.dart';
 import 'package:store_app/features/feature_intro/presentation/screens/home_screen.dart';
 import 'package:store_app/features/feature_intro/presentation/screens/intro_main_wrapper.dart';
@@ -117,7 +118,7 @@ class _SplashScreenState extends State<SplashScreen> {
         
       } else {
 
-      Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName , ModalRoute.withName('home_screen'));
+      Navigator.pushNamedAndRemoveUntil(context, MainWrapper.routeName , ModalRoute.withName('main_wrapper'));
 
       }
     
