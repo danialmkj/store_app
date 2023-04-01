@@ -7,7 +7,11 @@ import 'package:store_app/features/feature_intro/presentation/screens/intro_main
 import 'features/feature_intro/presentation/screens/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+import 'locator.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initLocator(); // add locator
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(
