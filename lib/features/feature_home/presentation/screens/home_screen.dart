@@ -137,7 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
               return SingleChildScrollView(
-                child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
                       //header banner
@@ -173,9 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )
                               : Container(),
-                
+                  
                           SizedBox(height: 10,),   
-                
+                  
                            (homeModel.data.sliders.length > 1)
                               ? Center(
                             child: SmoothPageIndicator(
@@ -185,9 +186,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )
                               : Container(),
-                
+                  
                           const SizedBox(height: 10),
-                
+                  
                           /// category 8
                           SizedBox(
                             height: 220,
@@ -207,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (BuildContext context, int index){
                                 final image = homeModel.data.categories[index].img;
                                 final categoryName = homeModel.data.categories[index].title;
-                
+                  
                                 return GestureDetector(
                                   // onTap: (){
                                   //   Navigator.pushNamed(
