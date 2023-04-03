@@ -13,9 +13,9 @@ class HomeRepository {
 
   //call api from homeApi and fetch StatusCode
  //call api from homeApi and fetch StatusCode
-  Future<DataState<HomeModel>> fetchHomeData() async {
+  Future<DataState<HomeModel>> fetchHomeData(lat, lon) async {
     //try {
-      Response response = await apiProvider.callHomeData();
+      Response response = await apiProvider.callHomeData(lat, lon);
 
       if (response.statusCode == 200) {
         
@@ -23,7 +23,7 @@ class HomeRepository {
   
         HomeModel homeModel = HomeModel.fromJson(response.data);
 
-        print('one of data is ' + homeModel.data!.banners![0].image! );
+        print('one of data is ' + homeModel.data.banners[0].image );
 
         return DataSuccess(homeModel);
       } else {

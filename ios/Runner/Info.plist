@@ -29,6 +29,14 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+
+
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>we need user location for set his ecommerce</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>we need user location for set his ecommerce</string>
+
+
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

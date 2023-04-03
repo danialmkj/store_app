@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:location/location.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:store_app/common/widgets/dot_loading_widget.dart';
 import 'package:store_app/features/feature_home/data/models/home_model.dart';
@@ -27,6 +28,43 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer?  _timer;
   int _currentPage = 0;
 
+  late bool _serviceEnabled;
+  late PermissionStatus _permissionGranted;
+  var lat = 35.69611;
+  var lon = 51.42306;
+  LocationData? _userLocation;
+
+  Future<void> getUserLocation(BuildContext context) async {
+    Location location = Location();
+
+    // Check if location service is enable
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
+        return;
+      }
+    }
+
+    // Check if permission is granted
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        /// call api with default lat lon
+        BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
+        return;
+      }
+    }
+
+    final _locationData = await location.getLocation();
+    lat = _locationData.latitude!;
+    lon = _locationData.longitude!;
+    BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
+
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -47,7 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (context) => HomeCubit(locator()),
       child: Builder(builder: (context) {
         //call api
-        BlocProvider.of<HomeCubit>(context).callHomeDataEvent();
+        //BlocProvider.of<HomeCubit>(context).callHomeDataEvent();
+        getUserLocation(context);
+
+
 
         return BlocBuilder<HomeCubit, HomeState>(
           buildWhen: (previous, current) {
@@ -78,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     //add timer for showing banners with animation
                   _timer ??= Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-                      if (_currentPage < homeModel.data!.sliders!.length - 1) {
+                      if (_currentPage < homeModel.data.sliders.length - 1) {
                         _currentPage++;
                       } else {
                         _currentPage = 0;
@@ -100,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       //header banner
-                      (homeModel.data!.sliders!.isNotEmpty)
+                      (homeModel.data.sliders.isNotEmpty)
                           ? SizedBox(
                             height: Responsive.isMobile(context) ? 180 : 300,
                             child: PageView.builder(
@@ -110,14 +151,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               allowImplicitScrolling: true,
                               controller: pageViewController,
                               physics: const BouncingScrollPhysics(),
-                              itemCount: homeModel.data!.sliders!.length,
+                              itemCount: homeModel.data.sliders.length,
                               itemBuilder: (context, index){
                                 return Container(
                                   margin: const EdgeInsets.symmetric(horizontal: 8.0,),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: CachedNetworkImage(
-                                      imageUrl: homeModel.data!.sliders![index].img!,
+                                      imageUrl: homeModel.data.sliders[index].img,
                                       placeholder: (context, string){
                                         return const Center(
                                           child: DotLoadingWidget(size: 40,),
@@ -135,11 +176,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 
                           SizedBox(height: 10,),   
                 
-                           (homeModel.data!.sliders!.length > 1)
+                           (homeModel.data.sliders.length > 1)
                               ? Center(
                             child: SmoothPageIndicator(
                               controller: pageViewController,  // PageController
-                              count:  homeModel.data!.sliders!.length,
+                              count:  homeModel.data.sliders.length,
                               effect: ExpandingDotsEffect(dotWidth: width * 0.02,dotHeight: width * 0.02,spacing: 5,activeDotColor: Colors.redAccent),  // your preferred effect
                             ),
                           )
@@ -157,15 +198,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisSpacing: 0.0,
                                 mainAxisSpacing: 8.0,
                               ),
-                              itemCount: homeModel.data!.categories!.length,
+                              itemCount: homeModel.data.categories.length,
                               // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               //   crossAxisCount: 4,
                               //   crossAxisSpacing: 4.0,
                               //   mainAxisSpacing: 4.0,
                               // ),
                               itemBuilder: (BuildContext context, int index){
-                                final image = homeModel.data!.categories![index].img;
-                                final categoryName = homeModel.data!.categories![index].title;
+                                final image = homeModel.data.categories[index].img;
+                                final categoryName = homeModel.data.categories[index].title;
                 
                                 return GestureDetector(
                                   // onTap: (){
@@ -207,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           primary: Colors.amber.shade800),
                       onPressed: () {
                         /// call all data again
-                        BlocProvider.of<HomeCubit>(context).callHomeDataEvent();
+                        BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
                       },
                       child: const Text("تلاش دوباره"),
                     )
