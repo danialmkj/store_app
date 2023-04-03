@@ -24,9 +24,21 @@ class MainWrapper extends StatelessWidget {
       bottomNavigationBar: BottomNav(controller: pageController),
     
 
-      body: PageView(
-        controller: pageController,
-        children: topLevelScreen,
+      body: Column(
+        children: [
+
+          //search bar
+
+
+          SizedBox(height: 10,),
+            
+          Expanded(
+            child: PageView(
+              controller: pageController,
+              children: topLevelScreen,
+            ),
+          ),
+        ],
       ),  
     
     );

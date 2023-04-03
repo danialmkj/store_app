@@ -30,6 +30,7 @@ environment:
 dependencies:
   badges: ^3.0.3
   bloc: ^8.1.1
+  cached_network_image: ^3.2.3
   connectivity_plus: ^3.0.3
   cupertino_icons: ^1.0.2
   delayed_widget: ^1.1.2
