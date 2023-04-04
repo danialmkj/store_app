@@ -24,7 +24,6 @@ class CategoryScreen extends StatelessWidget {
           builder: (context, state) {
             //loading
             if (state.categoryDataStatus is CategoryDataLoading) {
-              log('in Loading');
               return Center(
                 child: DotLoadingWidget(size: 30),
               );
@@ -32,20 +31,14 @@ class CategoryScreen extends StatelessWidget {
 
             //complete
             if (state.categoryDataStatus is CategoryDataComplete) {
-              log('in complete');
 
-              CategoryDataComplete categoryDataComplete =
-                  state.categoryDataStatus as CategoryDataComplete;
-
-              CategoriesModel categoriesModel =
-                  categoryDataComplete.categoriesModel;
+               CategoryDataComplete categoryDataCompleted = state.categoryDataStatus as CategoryDataComplete;
+               CategoriesModel categoriesModel = categoryDataCompleted.categoriesModel;
 
               return ListView.separated(
                 padding: const EdgeInsets.only(top: 20),
                 itemBuilder: (context, index) {
                   Data categoryData = categoriesModel.data![index];
-
-                  log('image is ' + categoryData.img!);
 
                   /// text
                   return GestureDetector(
@@ -124,7 +117,6 @@ class CategoryScreen extends StatelessWidget {
 
             //error
             if (state.categoryDataStatus is CategoryDataError) {
-              log('in Error');
 
               CategoryDataError categoryDataError =
                   state.categoryDataStatus as CategoryDataError;

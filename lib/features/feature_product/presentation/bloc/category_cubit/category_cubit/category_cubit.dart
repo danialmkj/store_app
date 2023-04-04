@@ -20,13 +20,13 @@ class CategoryCubit extends Cubit<CategoryState> {
     DataState dataState = await categoryRepository.fetchCategoryData();
 
     //complete
-    if (DataState is DataSuccess) {
+    if (dataState is DataSuccess) {
       emit(state.copyWith(
           newCategoryDataStatus: CategoryDataComplete(dataState.data)));
 
       //error
     }
-    if (DataState is DataFailed) {
+    if (dataState is DataFailed) {
       emit(state.copyWith(
           newCategoryDataStatus: CategoryDataError(dataState.error!)));
     }
