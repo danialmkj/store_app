@@ -45,14 +45,14 @@ class Data {
     List<Banner> banners;
     List<CategoryElement> categories;
     List<SuggestionProduct> suggestionProducts;
-    String nearShops;
+    List<NearShops>? nearShops;
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         sliders: List<Slider>.from(json["sliders"].map((x) => Slider.fromJson(x))),
         banners: List<Banner>.from(json["banners"].map((x) => Banner.fromJson(x))),
         categories: List<CategoryElement>.from(json["categories"].map((x) => CategoryElement.fromJson(x))),
         suggestionProducts: List<SuggestionProduct>.from(json["suggestionProducts"].map((x) => SuggestionProduct.fromJson(x))),
-        nearShops: json["nearShops"],
+        nearShops: List<NearShops>.from(json["nearShops"].map((x) => NearShops.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -60,7 +60,7 @@ class Data {
         "banners": List<dynamic>.from(banners.map((x) => x.toJson())),
         "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
         "suggestionProducts": List<dynamic>.from(suggestionProducts.map((x) => x.toJson())),
-        "nearShops": nearShops,
+        "nearShops": List<dynamic>.from(nearShops!.map((x) => x.toJson())),
     };
 }
 
@@ -265,4 +265,49 @@ class EnumValues<T> {
         reverseMap = map.map((k, v) => MapEntry(v, k));
         return reverseMap;
     }
+}
+
+
+
+/// id : 1
+/// name : "مدیر"
+/// companyName : "نیاز شاپ"
+/// avatar : "https://shopbs.besenior.ir/images/image-not-found.png"
+/// lat : null
+/// long : null
+class NearShops {
+  NearShops({
+    this.id,
+    this.name,
+    this.companyName,
+    this.avatar,
+    this.lat,
+    this.long,});
+
+  NearShops.fromJson(dynamic json) {
+    id = json['id'];
+    name = json['name'];
+    companyName = json['companyName'];
+    avatar = json['avatar'];
+    lat = json['lat'];
+    long = json['long'];
+  }
+  int? id;
+  String? name;
+  String? companyName;
+  String? avatar;
+  dynamic lat;
+  dynamic long;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['name'] = name;
+    map['companyName'] = companyName;
+    map['avatar'] = avatar;
+    map['lat'] = lat;
+    map['long'] = long;
+    return map;
+  }
+
 }
