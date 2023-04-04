@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
@@ -13,6 +15,7 @@ import 'locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MyHttpOverrides global = MyHttpOverrides(); //add this line when we occured to error from fetching data in besenior site
   await initLocator(); // add locator
   runApp(MultiBlocProvider(
     providers: [
@@ -55,5 +58,15 @@ class MyApp extends StatelessWidget {
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
     );
+  }
+}
+
+
+//if we occured to error for api from besenior
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }
