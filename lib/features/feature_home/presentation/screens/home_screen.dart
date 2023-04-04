@@ -14,7 +14,7 @@ import '../../../../config/responsive.dart';
 import '../widgets/category_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-   HomeScreen({super.key});
+  HomeScreen({super.key});
 
   static const routeName = '/home_screen';
 
@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageViewController = PageController();
 
-  Timer?  _timer;
+  Timer? _timer;
   int _currentPage = 0;
 
   late bool _serviceEnabled;
@@ -62,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
     lat = _locationData.latitude!;
     lon = _locationData.longitude!;
     BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
-
   }
 
   @override
@@ -77,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
@@ -87,8 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
         //call api
         //BlocProvider.of<HomeCubit>(context).callHomeDataEvent();
         getUserLocation(context);
-
-
 
         return BlocBuilder<HomeCubit, HomeState>(
           buildWhen: (previous, current) {
@@ -116,25 +112,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
               log('NEW PARAMETER is ' + homeModel.data.banners[0].image);
 
+              //add timer for showing banners with animation
+              _timer ??=
+                  Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+                if (_currentPage < homeModel.data.sliders.length - 1) {
+                  _currentPage++;
+                } else {
+                  _currentPage = 0;
+                }
 
-                    //add timer for showing banners with animation
-                  _timer ??= Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-                      if (_currentPage < homeModel.data.sliders.length - 1) {
-                        _currentPage++;
-                      } else {
-                        _currentPage = 0;
-                      }
-
-                      if(pageViewController.positions.isNotEmpty){
-                        pageViewController.animateToPage(
-                          _currentPage,
-                          duration: const Duration(milliseconds: 350),
-                          curve: Curves.easeIn,
-                        );
-                      }
-
-                    });
-
+                if (pageViewController.positions.isNotEmpty) {
+                  pageViewController.animateToPage(
+                    _currentPage,
+                    duration: const Duration(milliseconds: 350),
+                    curve: Curves.easeIn,
+                  );
+                }
+              });
 
               return SingleChildScrollView(
                 child: Padding(
@@ -144,84 +138,103 @@ class _HomeScreenState extends State<HomeScreen> {
                       //header banner
                       (homeModel.data.sliders.isNotEmpty)
                           ? SizedBox(
-                            height: Responsive.isMobile(context) ? 180 : 300,
-                            child: PageView.builder(
-                              onPageChanged: (page){
-                                // _timer.
-                              },
-                              allowImplicitScrolling: true,
-                              controller: pageViewController,
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: homeModel.data.sliders.length,
-                              itemBuilder: (context, index){
-                                return Container(
-                                  margin: const EdgeInsets.symmetric(horizontal: 8.0,),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: CachedNetworkImage(
-                                      imageUrl: homeModel.data.sliders[index].img,
-                                      placeholder: (context, string){
-                                        return const Center(
-                                          child: DotLoadingWidget(size: 40,),
-                                        );
-                                      },
-                                      fit: BoxFit.cover,
-                                      useOldImageOnUrlChange: true,
+                              height: Responsive.isMobile(context) ? 180 : 300,
+                              child: PageView.builder(
+                                onPageChanged: (page) {
+                                  // _timer.
+                                },
+                                allowImplicitScrolling: true,
+                                controller: pageViewController,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: homeModel.data.sliders.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                              : Container(),
-                  
-                          SizedBox(height: 10,),   
-                  
-                           (homeModel.data.sliders.length > 1)
-                              ? Center(
-                            child: SmoothPageIndicator(
-                              controller: pageViewController,  // PageController
-                              count:  homeModel.data.sliders.length,
-                              effect: ExpandingDotsEffect(dotWidth: width * 0.02,dotHeight: width * 0.02,spacing: 5,activeDotColor: Colors.redAccent),  // your preferred effect
-                            ),
-                          )
-                              : Container(),
-                  
-                          const SizedBox(height: 10),
-                  
-                          /// category 8
-                          SizedBox(
-                            height: 220,
-                            child: GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 0.0,
-                                mainAxisSpacing: 8.0,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            homeModel.data.sliders[index].img,
+                                        placeholder: (context, string) {
+                                          return const Center(
+                                            child: DotLoadingWidget(
+                                              size: 40,
+                                            ),
+                                          );
+                                        },
+                                        fit: BoxFit.cover,
+                                        useOldImageOnUrlChange: true,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                              itemCount: homeModel.data.categories.length,
-                              // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              //   crossAxisCount: 4,
-                              //   crossAxisSpacing: 4.0,
-                              //   mainAxisSpacing: 4.0,
-                              // ),
-                              itemBuilder: (BuildContext context, int index){
-                                final image = homeModel.data.categories[index].img;
-                                final categoryName = homeModel.data.categories[index].title;
-                  
-                                return GestureDetector(
-                                  // onTap: (){
-                                  //   Navigator.pushNamed(
-                                  //     context,
-                                  //     AllProductsScreen.routeName,
-                                  //     arguments: ProductsArguments(categoryId: homeModel.data!.categories![index].id!),);
-                                  // },
-                                  child: CategoryWidget(image: image.toString(), title: categoryName.toString()),
-                                );
-                              },
-                            ),
+                            )
+                          : Container(),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                      (homeModel.data.sliders.length > 1)
+                          ? Center(
+                              child: SmoothPageIndicator(
+                                controller:
+                                    pageViewController, // PageController
+                                count: homeModel.data.sliders.length,
+                                effect: ExpandingDotsEffect(
+                                    dotWidth: width * 0.02,
+                                    dotHeight: width * 0.02,
+                                    spacing: 5,
+                                    activeDotColor: Colors
+                                        .redAccent), // your preferred effect
+                              ),
+                            )
+                          : Container(),
+
+                      const SizedBox(height: 10),
+
+                      /// category 8
+                      SizedBox(
+                        height: 220,
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            crossAxisSpacing: 0.0,
+                            mainAxisSpacing: 8.0,
                           ),
-                          SizedBox(height: height * 0.01,), 
+                          itemCount: homeModel.data.categories.length,
+                          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          //   crossAxisCount: 4,
+                          //   crossAxisSpacing: 4.0,
+                          //   mainAxisSpacing: 4.0,
+                          // ),
+                          itemBuilder: (BuildContext context, int index) {
+                            final image = homeModel.data.categories[index].img;
+                            final categoryName =
+                                homeModel.data.categories[index].title;
+
+                            return GestureDetector(
+                              // onTap: (){
+                              //   Navigator.pushNamed(
+                              //     context,
+                              //     AllProductsScreen.routeName,
+                              //     arguments: ProductsArguments(categoryId: homeModel.data!.categories![index].id!),);
+                              // },
+                              child: CategoryWidget(
+                                  image: image.toString(),
+                                  title: categoryName.toString()),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
                     ],
                   ),
                 ),
@@ -249,7 +262,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           primary: Colors.amber.shade800),
                       onPressed: () {
                         /// call all data again
-                        BlocProvider.of<HomeCubit>(context).callHomeDataEvent(lat, lon);
+                        BlocProvider.of<HomeCubit>(context)
+                            .callHomeDataEvent(lat, lon);
                       },
                       child: const Text("تلاش دوباره"),
                     )

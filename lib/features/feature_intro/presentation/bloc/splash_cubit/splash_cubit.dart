@@ -6,15 +6,12 @@ part 'splash_state.dart';
 part 'connection_status.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-
   SplashRepository splashRepository = SplashRepository();
 
   SplashCubit() : super(SplashState(connectionStatus: ConnectionInitial()));
 
-
-  void checkConnectionEvent()async{
+  void checkConnectionEvent() async {
     emit(state.copyWith(newConnectionStatus: ConnectionInitial()));
-
 
     bool isConnect = await splashRepository.checkConnecticity();
 
@@ -23,6 +20,5 @@ class SplashCubit extends Cubit<SplashState> {
     } else {
       emit(state.copyWith(newConnectionStatus: ConnectionOff()));
     }
-
   }
 }

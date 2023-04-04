@@ -72,10 +72,12 @@ class IntroMainWrapper extends StatelessWidget {
                         controller: pageController,
                         children: introPages,
                         onPageChanged: (index) {
-                          if(index == 2 ){
-                            BlocProvider.of<IntroCubit>(context).changeGetStart(true);
-                          }else{
-                            BlocProvider.of<IntroCubit>(context).changeGetStart(false);
+                          if (index == 2) {
+                            BlocProvider.of<IntroCubit>(context)
+                                .changeGetStart(true);
+                          } else {
+                            BlocProvider.of<IntroCubit>(context)
+                                .changeGetStart(false);
                           }
                         },
                       ))),
@@ -97,10 +99,9 @@ class IntroMainWrapper extends StatelessWidget {
                             child: GetStartBtn(
                                 text: 'شروع کنید',
                                 onTap: () {
-
-                                  PrefsOperator prefsOperator = locator<PrefsOperator>();
+                                  PrefsOperator prefsOperator =
+                                      locator<PrefsOperator>();
                                   prefsOperator.changeIntroState();
-
 
                                   Navigator.pushNamedAndRemoveUntil(
                                       context,

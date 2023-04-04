@@ -10,7 +10,6 @@ import 'package:store_app/features/feature_intro/presentation/screens/intro_main
 import 'package:store_app/locator.dart';
 
 class SplashScreen extends StatefulWidget {
-
   static const routeName = '/';
 
   const SplashScreen({super.key});
@@ -20,8 +19,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
+        body: Container(
       color: Colors.white,
       width: width,
       child: Column(
@@ -55,36 +52,39 @@ class _SplashScreenState extends State<SplashScreen> {
                     'assets/images/google_shopping_icon.png',
                     width: width * 0.5,
                   ))),
-          
-          
           BlocConsumer<SplashCubit, SplashState>(
             builder: (context, state) {
-            
               //! user is online
-              if (state.connectionStatus is ConnectionInitial || state.connectionStatus is ConnectionOn) {
+              if (state.connectionStatus is ConnectionInitial ||
+                  state.connectionStatus is ConnectionOn) {
                 return Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: LoadingAnimationWidget.prograssiveDots(color: Colors.red, size: 50));
+                    textDirection: TextDirection.ltr,
+                    child: LoadingAnimationWidget.prograssiveDots(
+                        color: Colors.red, size: 50));
               }
 
-               //! user is offline 
-              else if(state.connectionStatus is ConnectionOff){
+              //! user is offline
+              else if (state.connectionStatus is ConnectionOff) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  const Text('شما به اینترنت متصل نیستید!' , style: TextStyle(color: Colors.red),),
-                  IconButton(
-                    onPressed: (){
-                      //check we are online or not
-                    BlocProvider.of<SplashCubit>(context).checkConnectionEvent();
-                  }, 
-                  icon: const Icon(Icons.autorenew_rounded))],);
+                    const Text(
+                      'شما به اینترنت متصل نیستید!',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          //check we are online or not
+                          BlocProvider.of<SplashCubit>(context)
+                              .checkConnectionEvent();
+                        },
+                        icon: const Icon(Icons.autorenew_rounded))
+                  ],
+                );
               }
 
-
-              //! default value 
+              //! default value
               return Container();
-            
             },
             listener: (context, state) {
               if (state.connectionStatus is ConnectionOn) {
@@ -101,26 +101,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> goToHome() async {
-    
     PrefsOperator prefsOperator = locator<PrefsOperator>();
-      var shouldShowIntro  = await prefsOperator.getIntroState();
+    var shouldShowIntro = await prefsOperator.getIntroState();
 
-    
     return Future.delayed(const Duration(seconds: 3), () {
       //CustomSnackBar.showsnack(context, 'وارد شدید', Colors.green);
       //Navigator.of(context).pushNamed('intro_main_wrapper');
       //Navigator.of(context).pushNamed(IntroMainWrapper.routeName , arguments: 'DanialMJK'); //send argument
-      
+
       if (shouldShowIntro) {
-      
-      Navigator.pushNamedAndRemoveUntil(context, IntroMainWrapper.routeName,ModalRoute.withName('intro_main_wrapper'));
-        
+        Navigator.pushNamedAndRemoveUntil(context, IntroMainWrapper.routeName,
+            ModalRoute.withName('intro_main_wrapper'));
       } else {
-
-      Navigator.pushNamedAndRemoveUntil(context, MainWrapper.routeName , ModalRoute.withName('main_wrapper'));
-
+        Navigator.pushNamedAndRemoveUntil(context, MainWrapper.routeName,
+            ModalRoute.withName('main_wrapper'));
       }
-    
     });
   }
 }

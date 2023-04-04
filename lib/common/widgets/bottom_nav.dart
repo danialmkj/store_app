@@ -40,17 +40,26 @@ class BottomNav extends StatelessWidget {
                           IconButton(
                               onPressed: () {
                                 /// change selected index
-                                BlocProvider.of<BottomNavCubit>(context).changeSelectedIndex(0);
-                                controller.animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                                BlocProvider.of<BottomNavCubit>(context)
+                                    .changeSelectedIndex(0);
+                                controller.animateToPage(0,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut);
                               },
                               icon: Image.asset(
-                                state == 0 ? "assets/images/home_icon.png" : "assets/images/home_icon2.png",
-                                color: state == 0 ? Colors.red : Colors.grey.shade700,
-                              )
-                          ),
+                                state == 0
+                                    ? "assets/images/home_icon.png"
+                                    : "assets/images/home_icon2.png",
+                                color: state == 0
+                                    ? Colors.red
+                                    : Colors.grey.shade700,
+                              )),
                           Text(
                             'آنلاین شاپ',
-                            style: TextStyle(fontSize: 14,fontFamily: 'Yekan',color: Colors.grey.shade700),
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Yekan',
+                                color: Colors.grey.shade700),
                           ),
                         ],
                       ),
@@ -58,20 +67,27 @@ class BottomNav extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () {
-                                BlocProvider.of<BottomNavCubit>(context).changeSelectedIndex(1);
-                                controller.animateToPage(1, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                                BlocProvider.of<BottomNavCubit>(context)
+                                    .changeSelectedIndex(1);
+                                controller.animateToPage(1,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut);
                               },
                               icon: Image.asset(
                                 state == 1
                                     ? "assets/images/category_icon.png"
-                                    : "assets/images/category_icon2.png" ,
-                                color: state == 1 ? Colors.red : Colors.grey.shade700,
+                                    : "assets/images/category_icon2.png",
+                                color: state == 1
+                                    ? Colors.red
+                                    : Colors.grey.shade700,
                                 width: 40,
-                              )
-                          ),
+                              )),
                           Text(
                             'دسته بندی',
-                            style: TextStyle(fontSize: 14,fontFamily: 'Yekan',color: Colors.grey.shade700),
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Yekan',
+                                color: Colors.grey.shade700),
                           ),
                         ],
                       ),
@@ -87,15 +103,29 @@ class BottomNav extends StatelessWidget {
                       Column(
                         children: [
                           IconButton(
-                              onPressed: () async {
-                                  BlocProvider.of<BottomNavCubit>(context).changeSelectedIndex(2);
-                                  controller.animateToPage(2, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-                              },
-                              icon: SvgPicture.asset(state == 2 ? "assets/images/person_icon.svg" : "assets/images/person_icon2.svg", color: state == 2 ? Colors.red : Colors.grey.shade700,width: 48,),
+                            onPressed: () async {
+                              BlocProvider.of<BottomNavCubit>(context)
+                                  .changeSelectedIndex(2);
+                              controller.animateToPage(2,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut);
+                            },
+                            icon: SvgPicture.asset(
+                              state == 2
+                                  ? "assets/images/person_icon.svg"
+                                  : "assets/images/person_icon2.svg",
+                              color: state == 2
+                                  ? Colors.red
+                                  : Colors.grey.shade700,
+                              width: 48,
+                            ),
                           ),
                           Text(
                             'حساب کاربری',
-                            style: TextStyle(fontSize: 14,fontFamily: 'Yekan',color: Colors.grey.shade700),
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Yekan',
+                                color: Colors.grey.shade700),
                           ),
                         ],
                       ),
@@ -103,20 +133,27 @@ class BottomNav extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () async {
-                                BlocProvider.of<BottomNavCubit>(context).changeSelectedIndex(3);
-                                controller.animateToPage(3, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                                BlocProvider.of<BottomNavCubit>(context)
+                                    .changeSelectedIndex(3);
+                                controller.animateToPage(3,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut);
                               },
                               icon: FaIcon(
                                 state == 3
                                     ? Icons.shopping_cart
                                     : Icons.shopping_cart_outlined,
-                                color: state == 3 ? Colors.red : Colors.grey.shade700,
+                                color: state == 3
+                                    ? Colors.red
+                                    : Colors.grey.shade700,
                                 size: 27,
-                              )
-                          ),
+                              )),
                           Text(
                             'سبد خرید',
-                            style: TextStyle(fontSize: 14,fontFamily: 'Yekan',color: Colors.grey.shade700),
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Yekan',
+                                color: Colors.grey.shade700),
                           ),
                         ],
                       ),
@@ -130,7 +167,6 @@ class BottomNav extends StatelessWidget {
       ),
     );
   }
-
 
   Future<bool> getDataFromPrefs() async {
     // Obtain shared preferences.

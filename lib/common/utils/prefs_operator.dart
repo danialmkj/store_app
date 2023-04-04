@@ -1,4 +1,3 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../locator.dart';
 
@@ -6,9 +5,9 @@ class PrefsOperator {
   late SharedPreferences sharedPreferences;
 
   PrefsOperator() {
-    sharedPreferences = locator<SharedPreferences>(); //using instance in locator
+    sharedPreferences =
+        locator<SharedPreferences>(); //using instance in locator
   }
-
 
   saveUserData(token, userName, mobile) async {
     sharedPreferences.setString("user_token", token);
@@ -38,5 +37,4 @@ class PrefsOperator {
     sharedPreferences.clear();
     sharedPreferences.setBool("showIntro", false);
   }
-
 }

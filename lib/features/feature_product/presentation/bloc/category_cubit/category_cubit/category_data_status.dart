@@ -18,4 +18,3 @@ class CategoryDataError extends CategoryDataStatus {
 
   CategoryDataError(this.message);
 }
-

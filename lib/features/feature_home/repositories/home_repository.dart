@@ -22,10 +22,8 @@ class HomeRepository {
       HomeModel homeModel = HomeModel.fromJson(response.data);
 
       return DataSuccess(homeModel);
-
-    } on AppException catch(e){
+    } on AppException catch (e) {
       return await CheckExceptions.getError(e);
     }
-    
   }
 }

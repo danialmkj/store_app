@@ -1,10 +1,8 @@
-
 import 'package:dio/dio.dart';
 import '../resources/data_state.dart';
 import 'app_exception.dart';
 
 class CheckExceptions {
-
   static dynamic response(Response response) {
     switch (response.statusCode) {
       case 200:
@@ -18,7 +16,8 @@ class CheckExceptions {
       case 500:
         throw ServerException();
       default:
-        throw FetchDataException(message: "${response.statusCode}fetch exception");
+        throw FetchDataException(
+            message: "${response.statusCode}fetch exception");
     }
   }
 
@@ -30,6 +29,7 @@ class CheckExceptions {
 
       case NotFoundException:
         return DataFailed(appException.message);
+
       /// get refresh token and call api again
       case UnauthorisedException:
         return DataFailed(appException.message);

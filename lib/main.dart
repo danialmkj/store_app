@@ -15,7 +15,8 @@ import 'locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MyHttpOverrides global = MyHttpOverrides(); //add this line when we occured to error from fetching data in besenior site
+  MyHttpOverrides global =
+      MyHttpOverrides(); //add this line when we occured to error from fetching data in besenior site
   await initLocator(); // add locator
   runApp(MultiBlocProvider(
     providers: [
@@ -41,8 +42,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         IntroMainWrapper.routeName: (context) => IntroMainWrapper(),
-        MainWrapper.routeName: (context)=> MainWrapper(),
-        HomeScreen.routeName:(context)=> HomeScreen(),
+        MainWrapper.routeName: (context) => MainWrapper(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
       supportedLocales: [
         Locale('en', ''),
@@ -61,12 +62,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 //if we occured to error for api from besenior
-class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

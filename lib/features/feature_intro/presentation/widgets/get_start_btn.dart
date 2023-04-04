@@ -1,17 +1,17 @@
-
 import 'package:flutter/material.dart';
 
 class GetStartBtn extends StatefulWidget {
   final String text;
   final Function onTap;
-  const GetStartBtn({Key? key, required this.text, required this.onTap}) : super(key: key);
+  const GetStartBtn({Key? key, required this.text, required this.onTap})
+      : super(key: key);
 
   @override
   State<GetStartBtn> createState() => _GetStartBtnState();
 }
 
-class _GetStartBtnState extends State<GetStartBtn> with TickerProviderStateMixin{
-
+class _GetStartBtnState extends State<GetStartBtn>
+    with TickerProviderStateMixin {
   late AnimationController fadeController;
   late Animation<double> fadeAnimation;
 
@@ -51,10 +51,18 @@ class _GetStartBtnState extends State<GetStartBtn> with TickerProviderStateMixin
               borderRadius: BorderRadius.circular(20), // <-- Radius
             ),
           ),
-          onPressed: (){
+          onPressed: () {
             widget.onTap();
           },
-          child: Text(widget.text, style: const TextStyle(fontSize: 17,color: Colors.black,fontWeight: FontWeight.w500, fontFamily: 'Vazir'),),),
+          child: Text(
+            widget.text,
+            style: const TextStyle(
+                fontSize: 17,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Vazir'),
+          ),
+        ),
       ),
     );
   }

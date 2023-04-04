@@ -8,27 +8,27 @@ part 'category_state.dart';
 part 'category_data_status.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
-  
   CategoryRepository categoryRepository;
-  
-  CategoryCubit(this.categoryRepository) : super(CategoryState(categoryDataStatus: CategoryDataLoading()));
 
+  CategoryCubit(this.categoryRepository)
+      : super(CategoryState(categoryDataStatus: CategoryDataLoading()));
 
-  Future<void> loadCategoryEvent()async{
+  Future<void> loadCategoryEvent() async {
     //loading
     emit(state.copyWith(newCategoryDataStatus: CategoryDataLoading()));
-    
-    DataState dataState  = await categoryRepository.fetchCategoryData();  
 
-    //complete  
+    DataState dataState = await categoryRepository.fetchCategoryData();
+
+    //complete
     if (DataState is DataSuccess) {
+      emit(state.copyWith(
+          newCategoryDataStatus: CategoryDataComplete(dataState.data)));
 
-      emit(state.copyWith(newCategoryDataStatus: CategoryDataComplete(dataState.data)));
-    
-    //error
-    }if (DataState is DataFailed) {
-      
-    emit(state.copyWith(newCategoryDataStatus: CategoryDataError(dataState.error!)));
+      //error
     }
-  } 
+    if (DataState is DataFailed) {
+      emit(state.copyWith(
+          newCategoryDataStatus: CategoryDataError(dataState.error!)));
+    }
+  }
 }
