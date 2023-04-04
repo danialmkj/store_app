@@ -38,7 +38,7 @@ class CategoryScreen extends StatelessWidget {
               return ListView.separated(
                 padding: const EdgeInsets.only(top: 20),
                 itemBuilder: (context, index) {
-                  Data categoryData = categoriesModel.data![index];
+                  Data categoryData = categoriesModel.data[index];
 
                   /// text
                   return GestureDetector(
@@ -71,7 +71,7 @@ class CategoryScreen extends StatelessWidget {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: CachedNetworkImage(
-                                      imageUrl: categoryData.icon!,
+                                      imageUrl: categoryData.icon,
                                       errorWidget: (context, string, dynamic) {
                                         return const Icon(
                                           Icons.error,
@@ -88,7 +88,7 @@ class CategoryScreen extends StatelessWidget {
                                     width: 5,
                                   ),
                                   Text(
-                                    categoryData.title!,
+                                    categoryData.title,
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'Vazir',
@@ -111,7 +111,7 @@ class CategoryScreen extends StatelessWidget {
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
                 },
-                itemCount: categoriesModel.data!.length,
+                itemCount: categoriesModel.data.length,
               );
             }
 
