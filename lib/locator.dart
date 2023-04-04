@@ -5,6 +5,8 @@ import 'package:store_app/common/utils/prefs_operator.dart';
 import 'package:store_app/features/feature_home/data/data_source/home_api_provider.dart';
 import 'package:store_app/features/feature_home/repositories/home_repository.dart';
 import 'package:store_app/features/feature_product/data/data_source/category_api_provider.dart';
+import 'package:store_app/features/feature_product/data/data_source/product_api_provider.dart';
+import 'package:store_app/features/feature_product/repository/all_product_repository.dart';
 import 'package:store_app/features/feature_product/repository/category_repository.dart';
 
 GetIt locator = GetIt.instance;
@@ -20,12 +22,11 @@ Future<void> initLocator() async {
 
 // api provider
   locator.registerSingleton<HomeApiProvider>(HomeApiProvider(locator()));
-  locator
-      .registerSingleton<CategoryApiProvider>(CategoryApiProvider(locator()));
+  locator.registerSingleton<CategoryApiProvider>(CategoryApiProvider(locator()));
+  locator.registerSingleton<ProductsApiProvider>((ProductsApiProvider(locator())));
 
 // repository
-  locator.registerSingleton<HomeRepository>(
-      HomeRepository(apiProvider: locator()));
-  locator.registerSingleton<CategoryRepository>(
-      CategoryRepository(categoryApiProvider: locator()));
+  locator.registerSingleton<HomeRepository>(HomeRepository(apiProvider: locator()));
+  locator.registerSingleton<CategoryRepository>(CategoryRepository(categoryApiProvider: locator()));
+  locator.registerSingleton<AllProductsRepository>(AllProductsRepository(locator()));
 }
