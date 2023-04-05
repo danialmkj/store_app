@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: Column(
                             children: [
-                              (homeModel.data!.banners!.isNotEmpty)
+                              (homeModel.data.banners.isNotEmpty)
                                   ? GestureDetector(
                                 onTap: (){
                                   // Navigator.pushNamed(context, SellerScreen.routeName);
@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: CachedNetworkImage(
-                                    imageUrl: homeModel.data!.banners![0].image!,
+                                    imageUrl: homeModel.data.banners[0].image,
                                     placeholder: (context, string){
                                       return const Center(
                                         child: DotLoadingWidget(size: 40,),
@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               SizedBox(height: 10),
 
-                              (homeModel.data!.banners!.length > 1)
+                              (homeModel.data.banners.length > 1)
                                   ? GestureDetector(
                                 onTap: (){
                                   // if(homeModel.data!.banners![1].categoryId != null){
@@ -290,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: CachedNetworkImage(
-                                    imageUrl: homeModel.data!.banners![1].image!,
+                                    imageUrl: homeModel.data.banners[1].image,
                                     placeholder: (context, string){
                                       return const Center(
                                         child: DotLoadingWidget(size: 40,),
@@ -307,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        (homeModel.data!.banners!.length > 0 || homeModel.data!.banners!.length > 1)
+                        (homeModel.data.banners.length > 0 || homeModel.data.banners.length > 1)
                             ? SizedBox(height: 20,)
                             : Container(),
 
@@ -324,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Expanded(
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: discountProducts.items!.length,
+                                        itemCount: discountProducts.items.length,
                                         itemBuilder: (context, index){
                                           if(index == 0){
                                             return Column(
@@ -362,14 +362,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           child: Center(
                                                             child: CachedNetworkImage(
                                                               // imageUrl: "https://niyaz.shop/uploads/products/thum-%D9%85%D9%86%DA%AF%D9%88%D8%B3%D8%AA%DB%8C%D9%86-16630585025886737.png",
-                                                              imageUrl: discountProducts.items![index - 1].image!,
+                                                              imageUrl: discountProducts.items[index - 1].image,
                                                               fit: BoxFit.cover,
                                                               useOldImageOnUrlChange: true,
                                                             ),
                                                           ),
                                                         ),
                                                         SizedBox(height: height * 0.01,),
-                                                        Text(discountProducts.items![index - 1].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
+                                                        Text(discountProducts.items[index - 1].name, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
                                                         SizedBox(height: height * 0.01,),
                                                         const Text('موجود در بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
                                                         SizedBox(height: height * 0.03,),
@@ -379,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           children: [
 
                                                             /// discount red container
-                                                            (discountProducts.items![index - 1].discount! != 0)
+                                                            (discountProducts.items[index - 1].discount != 0)
                                                                 ? Container(
                                                               width: 40,
                                                               height: 30,
@@ -387,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   color: Colors.red,
                                                                   borderRadius: BorderRadius.circular(20)
                                                               ),
-                                                              child: Center(child: Text(discountProducts.items![index - 1].discount!.toString()+"%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
+                                                              child: Center(child: Text(discountProducts.items[index - 1].discount.toString()+"%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
                                                             )
                                                                 : Container(),
 
@@ -398,9 +398,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               children: [
                                                                 Column(
                                                                   children: [
-                                                                    Text(discountProducts.items![index - 1].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
-                                                                    (discountProducts.items![index - 1].priceBeforDiscount != "0")
-                                                                        ? Text(discountProducts.items![index - 1].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
+                                                                    Text(discountProducts.items[index - 1].price, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
+                                                                    (discountProducts.items[index - 1].priceBeforDiscount != "0")
+                                                                        ? Text(discountProducts.items[index - 1].priceBeforDiscount, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
                                                                         : Container(),
                                                                   ],
                                                                 ),
@@ -437,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: Column(
                             children: [
-                              (homeModel.data!.banners!.length > 2)
+                              (homeModel.data.banners.length > 2)
                                   ? GestureDetector(
                                 onTap: (){
                                   // if(homeModel.data!.banners![2].categoryId != null){
@@ -450,7 +450,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: CachedNetworkImage(
-                                    imageUrl: homeModel.data!.banners![2].image!,
+                                    imageUrl: homeModel.data.banners[2].image,
                                     placeholder: (context, string){
                                       return const Center(
                                         child: DotLoadingWidget(size: 40,),
@@ -467,10 +467,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               SizedBox(height: height * 0.02,),
 
-                              (homeModel.data!.banners!.length > 3)
+                              (homeModel.data.banners.length > 3)
                                   ? GestureDetector(
                                 onTap: (){
-                                  if(homeModel.data!.banners![3].categoryId != null){
+                                  if(homeModel.data.banners[3].categoryId != null){
                                     // Navigator.pushNamed(
                                     //   context,
                                     //   AllProductsScreen.routeName,
@@ -480,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: CachedNetworkImage(
-                                    imageUrl: homeModel.data!.banners![3].image!,
+                                    imageUrl: homeModel.data.banners[3].image,
                                     placeholder: (context, string){
                                       return const Center(
                                         child: DotLoadingWidget(size: 40,),
@@ -497,7 +497,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        (homeModel.data!.banners!.length > 2 || homeModel.data!.banners!.length > 3)
+                        (homeModel.data.banners.length > 2 || homeModel.data.banners.length > 3)
                             ? SizedBox(height: height * 0.02,)
                             : Container(),
 
@@ -515,7 +515,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(organicProducts.title!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
+                                        Text(organicProducts.title, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
                                         // Row(
                                         //   children: const [
                                         //     Text('مشاهده همه', style: TextStyle(fontFamily: 'Vazir',color: Colors.white),),
@@ -529,7 +529,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Expanded(
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: organicProducts.items!.length,
+                                        itemCount: organicProducts.items.length,
                                         itemBuilder: (context, index){
                                           return Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
@@ -556,14 +556,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         child: Center(
                                                           child: CachedNetworkImage(
                                                             // imageUrl: "https://niyaz.shop/uploads/products/thum-%D9%BE%D8%B1%D8%AA%D9%82%D8%A7%D9%84-%D8%B1%D8%B3%D9%85%DB%8C-16630019485051793.png",
-                                                            imageUrl: organicProducts.items![index].image!,
+                                                            imageUrl: organicProducts.items[index].image,
                                                             fit: BoxFit.cover,
                                                             useOldImageOnUrlChange: true,
                                                           ),
                                                         ),
                                                       ),
                                                       SizedBox(height: height * 0.01,),
-                                                      Text(organicProducts.items![index].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
+                                                      Text(organicProducts.items[index].name, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
                                                       SizedBox(height: height * 0.01,),
                                                       const Text('موجود در انبار بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
                                                       SizedBox(height: height * 0.03,),
@@ -571,7 +571,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Row(
                                                         children: [
                                                           /// discount red container
-                                                          (organicProducts.items![index].discount! != 0)
+                                                          (organicProducts.items[index].discount != 0)
                                                               ? Container(
                                                             width: 40,
                                                             height: 30,
@@ -579,7 +579,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 color: Colors.red,
                                                                 borderRadius: BorderRadius.circular(20)
                                                             ),
-                                                            child: Center(child: Text(organicProducts.items![index].discount!.toString()+"%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
+                                                            child: Center(child: Text(organicProducts.items[index].discount.toString()+"%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
                                                           )
                                                               : Container(),
 
@@ -590,9 +590,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             children: [
                                                               Column(
                                                                 children: [
-                                                                  Text(organicProducts.items![index].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
-                                                                  (organicProducts.items![index].priceBeforDiscount != "0")
-                                                                      ? Text(organicProducts.items![index].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
+                                                                  Text(organicProducts.items[index].price, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
+                                                                  (organicProducts.items[index].priceBeforDiscount != "0")
+                                                                      ? Text(organicProducts.items[index].priceBeforDiscount, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
                                                                       : Container(),
 
                                                                 ],
@@ -609,7 +609,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Center(
                                                         child: RatingBar.builder(
                                                           itemSize: 20,
-                                                          initialRating: organicProducts.items![index].star!.toDouble(),
+                                                          initialRating: organicProducts.items[index].star.toDouble(),
                                                           direction: Axis.horizontal,
                                                           allowHalfRating: true,
                                                           itemCount: 5,
@@ -656,7 +656,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(thirdProductsList.title ?? 'محصولات', style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
+                                        Text(thirdProductsList.title, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17),),
                                         // Row(
                                         //   children: const [
                                         //     Text('مشاهده همه', style: TextStyle(fontFamily: 'Vazir',color: Colors.white),),
@@ -670,7 +670,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Expanded(
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: thirdProductsList.items!.length,
+                                        itemCount: thirdProductsList.items.length,
                                         itemBuilder: (context, index){
                                           return Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
@@ -696,22 +696,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Expanded(
                                                         child: Center(
                                                           child: CachedNetworkImage(
-                                                            imageUrl: thirdProductsList.items![index].image!,
+                                                            imageUrl: thirdProductsList.items[index].image,
                                                             fit: BoxFit.cover,
                                                             useOldImageOnUrlChange: true,
                                                           ),
                                                         ),
                                                       ),
                                                       SizedBox(height: height * 0.01,),
-                                                      Text(thirdProductsList.items![index].name!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
+                                                      Text(thirdProductsList.items[index].name, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 12),),
                                                       SizedBox(height: height * 0.01,),
-                                                      const Text('موجود در انبار بیسینیور', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
+                                                      const Text('موجود در انبار فروشگاه آنلاین', style: TextStyle(fontFamily: 'Vazir',color: Colors.grey, fontWeight: FontWeight.bold,fontSize: 11),),
                                                       SizedBox(height: height * 0.03,),
 
                                                       Row(
                                                         children: [
                                                           /// discount red container
-                                                          (thirdProductsList.items![index].discount! != 0)
+                                                          (thirdProductsList.items[index].discount != 0)
                                                               ? Container(
                                                             width: 40,
                                                             height: 30,
@@ -719,7 +719,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 color: Colors.red,
                                                                 borderRadius: BorderRadius.circular(20)
                                                             ),
-                                                            child: Center(child: Text(thirdProductsList.items![index].discount!.toString()+"%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
+                                                            child: Center(child: Text(thirdProductsList.items[index].discount.toString()+"%", style: const TextStyle(fontFamily: 'Vazir',color: Colors.white, fontWeight: FontWeight.bold,fontSize: 13),)),
                                                           )
                                                               : Container(),
 
@@ -730,9 +730,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             children: [
                                                               Column(
                                                                 children: [
-                                                                  Text(thirdProductsList.items![index].price!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
-                                                                  (thirdProductsList.items![index].priceBeforDiscount != "0")
-                                                                      ? Text(thirdProductsList.items![index].priceBeforDiscount!, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
+                                                                  Text(thirdProductsList.items[index].price, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 13),),
+                                                                  (thirdProductsList.items[index].priceBeforDiscount != "0")
+                                                                      ? Text(thirdProductsList.items[index].priceBeforDiscount, style: const TextStyle(fontFamily: 'Vazir',color: Colors.black, fontWeight: FontWeight.bold,fontSize: 11,decoration: TextDecoration.lineThrough),)
                                                                       : Container(),
 
                                                                 ],
@@ -749,7 +749,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       Center(
                                                         child: RatingBar.builder(
                                                           itemSize: 20,
-                                                          initialRating: thirdProductsList.items![index].star!.toDouble(),
+                                                          initialRating: thirdProductsList.items[index].star.toDouble(),
                                                           direction: Axis.horizontal,
                                                           allowHalfRating: true,
                                                           itemCount: 5,
