@@ -23,7 +23,7 @@ class AuthApiProvider {
         "mobile" :  singUpParams.phoneNumber,
       });
 
-      print(response.toString());
+      print('response sign up is ' + response.toString());
 
       return response;
       
@@ -45,7 +45,7 @@ class AuthApiProvider {
         'hash' : (await AndroidSmsRetriever.getAppSignature()) //we should use this line to find sms which is for us
       } );
 
-      print(response.toString());
+      print('response loginWithSms is ' + response.toString());
 
       return response;
       
