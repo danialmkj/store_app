@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/common/widgets/bottom_nav.dart';
+import 'package:store_app/features/feature_home/presentation/screens/profile_screen.dart';
 import 'package:store_app/features/feature_product/presentation/screens/category_screen.dart';
 
 import '../../features/feature_home/presentation/screens/home_screen.dart';
@@ -20,9 +21,7 @@ class MainWrapper extends StatelessWidget {
   List<Widget> topLevelScreen = [
     HomeScreen(),
     CategoryScreen(),
-    Container(
-      color: Colors.amber,
-    ),
+    ProfileScreen(),
     Container(
       color: Colors.purple,
     ),
@@ -64,14 +63,14 @@ class MainWrapper extends StatelessWidget {
                 child: PageView(
                   controller: pageController,
                   children: topLevelScreen,
-                  onPageChanged: (value) {
-                    /// change selected index
-                    BlocProvider.of<BottomNavCubit>(context)
-                        .changeSelectedIndex(value);
-                    pageController.animateToPage(value,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut);
-                  },
+                  // onPageChanged: (value) {
+                  /// change selected index
+                  //   BlocProvider.of<BottomNavCubit>(context)
+                  //       .changeSelectedIndex(value);
+                  //   pageController.animateToPage(value,
+                  //       duration: const Duration(milliseconds: 300),
+                  //       curve: Curves.easeInOut);
+                  // },
                 ),
               ),
             ],
