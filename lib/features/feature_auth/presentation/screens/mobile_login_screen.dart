@@ -265,7 +265,7 @@ Future<void> saveDataToPrefs(CodeModel codeModel) async {
     await prefs.setString('user_token', codeModel.accessToken!);
     await prefs.setBool('user_loggedIn', true);
     await prefs.setString('user_name', codeModel.name ?? "نام کاربری");
-    await prefs.setString('user_mobile', codeModel.mobile.toString().toEnglishDigit() ?? "شماره تماس");
+    await prefs.setString('user_mobile', codeModel.mobile.toString().toEnglishDigit());
   }
 
   void showMyBottomSheet(BuildContext context) {
