@@ -14,7 +14,6 @@ import '../../../../locator.dart';
 import '../../data/models/sign_up_model.dart';
 import '../bloc/sign_up_cubit/sign_up_cubit.dart';
 import '../widgets/cutom_clippath_signup.dart';
-import '../widgets/sign_up_btm_sheet.dart';
 import 'mobile_login_screen.dart';
 
 class MobileSignUpScreen extends StatefulWidget {
@@ -398,7 +397,7 @@ class _MobileSignUpScreenState extends State<MobileSignUpScreen> {
           );
         }));
   }
-  
+
   void showMyBottomSheet(BuildContext context, LoginWithSmsModel loginWithSmsModel) {
     /// get device size
     var height = MediaQuery.of(context).size.height;
