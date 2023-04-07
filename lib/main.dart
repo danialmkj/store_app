@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'shopping app',
-      home: MobileLoginScreen(),
+      initialRoute:'/',
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         IntroMainWrapper.routeName: (context) => IntroMainWrapper(),
