@@ -18,7 +18,7 @@ class SignUpDataError extends SignUpDataStatus {
 }
 
 
-// it was for sign up event 
+//! it was for sign up event (we should remove it in using Cubit )
 class LoadSignUp extends SignUpDataStatus {
    final SingUpParams signUpParams;
 
