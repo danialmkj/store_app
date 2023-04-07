@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/common/blocs/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:store_app/common/widgets/main_wrapper.dart';
 import 'package:store_app/config/my_theme.dart';
+import 'package:store_app/features/feature_auth/presentation/screens/mobile_login_screen.dart';
+import 'package:store_app/features/feature_auth/presentation/screens/mobile_signup_screen.dart';
 import 'package:store_app/features/feature_home/presentation/screens/home_screen.dart';
 import 'package:store_app/features/feature_intro/presentation/bloc/splash_cubit/splash_cubit.dart';
 import 'package:store_app/features/feature_intro/presentation/screens/intro_main_wrapper.dart';
@@ -38,12 +40,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'shopping app',
-      initialRoute: '/',
+      home: MobileLoginScreen(),
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         IntroMainWrapper.routeName: (context) => IntroMainWrapper(),
         MainWrapper.routeName: (context) => MainWrapper(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        MobileLoginScreen.routeName : (context) => MobileLoginScreen(),
+        MobileSignUpScreen.routeName :(context) => MobileSignUpScreen(),
       },
       supportedLocales: [
         Locale('en', ''),
