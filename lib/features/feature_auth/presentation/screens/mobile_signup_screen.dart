@@ -310,7 +310,7 @@ class _MobileSignUpScreenState extends State<MobileSignUpScreen> {
                                     CallCodeCompleted callCodeCompleted = state
                                         .callCodeStatus as CallCodeCompleted;
                                     // saveDataToPrefs(signUpCompleted.signupModel);
-                                    CustomBottomSheet(context,callCodeCompleted.loginWithSmsModel);
+                                    SignUpBottomSheet(context,callCodeCompleted.loginWithSmsModel);
 
                                     // Navigator.pushNamedAndRemoveUntil(context, MainWrapper.routeName, ModalRoute.withName("/main_wrapper"),);
                                   }
@@ -398,7 +398,7 @@ class _MobileSignUpScreenState extends State<MobileSignUpScreen> {
         }));
   }
 
-  void showMyBottomSheet(BuildContext context, LoginWithSmsModel loginWithSmsModel) {
+  void SignUpBottomSheet(BuildContext context, LoginWithSmsModel loginWithSmsModel) {
     /// get device size
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
